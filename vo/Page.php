@@ -124,7 +124,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      * @param  mixed $key
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key): bool
     {
         return array_key_exists($key, $this->content);
     }
@@ -135,7 +135,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      * @param  mixed $key
      * @return mixed
      */
-    public function offsetGet($key)
+    public function offsetGet($key): mixed
     {
         return $this->content[$key];
     }
@@ -147,7 +147,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      * @param  mixed $value
      * @return void
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value): void
     {
         if (is_null($key)) {
             $this->content[] = $value;
@@ -162,7 +162,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      * @param  mixed $key
      * @return void
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
         unset($this->content[$key]);
     }
@@ -172,7 +172,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->content);
     }
@@ -182,7 +182,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->content);
     }
@@ -209,7 +209,7 @@ class Page implements ArrayAccess, Countable, IteratorAggregate, JsonSerializabl
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
