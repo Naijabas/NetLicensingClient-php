@@ -2,7 +2,7 @@
 /**
  * @author    Labs64 <netlicensing@labs64.com>
  * @license   Apache-2.0
- * @link      https://netlicensing.io
+ * @link      http://netlicensing.io
  * @copyright 2017 Labs64 NetLicensing
  */
 
@@ -10,7 +10,7 @@ namespace NetLicensing;
 
 /**
  * PHP representation of the License Service. See NetLicensingAPI for details:
- * https://netlicensing.io/wiki/license-services
+ * https://www.labs64.de/confluence/display/NLICPUB/License+Services
  *
  * @package NetLicensing
  */
@@ -18,7 +18,7 @@ class LicenseService
 {
     /**
      * Creates new license object with given properties.See NetLicensingAPI for details:
-     * https://netlicensing.io/wiki/license-services#create-license
+     * https://www.labs64.de/confluence/display/NLICPUB/License+Services#LicenseServices-Createlicense
      *
      * determines the vendor on whose behalf the call is performed
      * @param Context $context
@@ -44,7 +44,7 @@ class LicenseService
      * @throws RestException
      * @throws \ErrorException
      */
-    public static function create(Context $context, $licenseeNumber, $licenseTemplateNumber, $transactionNumber = null, License $license)
+    public static function create(Context $context, $licenseeNumber, $licenseTemplateNumber, License $license, $transactionNumber = null)
     {
         CheckUtils::paramNotEmpty($licenseeNumber, Constants::LICENSEE_NUMBER);
         CheckUtils::paramNotEmpty($licenseTemplateNumber, Constants::LICENSE_TEMPLATE_NUMBER);
@@ -69,7 +69,7 @@ class LicenseService
 
     /**
      * Gets license by its number.See NetLicensingAPI for details:
-     * https://netlicensing.io/wiki/license-services#get-license
+     * https://www.labs64.de/confluence/display/NLICPUB/License+Services#LicenseServices-Getlicense
      *
      * determines the vendor on whose behalf the call is performed
      * @param Context $context
@@ -101,7 +101,7 @@ class LicenseService
 
     /**
      * Returns licenses of a vendor.See NetLicensingAPI for details:
-     * https://netlicensing.io/wiki/license-services#licenses-list
+     * https://www.labs64.de/confluence/display/NLICPUB/License+Services#LicenseServices-Licenseslist
      *
      * determines the vendor on whose behalf the call is performed
      * @param Context $context
@@ -114,7 +114,7 @@ class LicenseService
      * @throws \ErrorException
      * @throws RestException
      */
-    public static function getList(Context $context, $filter = null): Page
+    public static function getList(Context $context, $filter = null)
     {
         $queryParams = (!is_null($filter)) ? [Constants::FILTER => $filter] : [];
 
@@ -141,7 +141,7 @@ class LicenseService
 
     /**
      * Updates license properties.See NetLicensingAPI for details:
-     * https://netlicensing.io/wiki/license-services#update-license
+     * https://www.labs64.de/confluence/display/NLICPUB/License+Services#LicenseServices-Updatelicense
      *
      * determines the vendor on whose behalf the call is performed
      * @param Context $context
@@ -162,7 +162,7 @@ class LicenseService
      * @throws RestException
      * @throws \ErrorException
      */
-    public static function update(Context $context, $number, $transactionNumber = null, License $license)
+    public static function update(Context $context, $number, License $license, $transactionNumber = null)
     {
         CheckUtils::paramNotEmpty($number, Constants::NUMBER);
 
@@ -183,7 +183,7 @@ class LicenseService
 
     /**
      * Deletes license.See NetLicensingAPI for details:
-     * https://netlicensing.io/wiki/license-services#delete-license
+     * https://www.labs64.de/confluence/display/NLICPUB/License+Services#LicenseServices-Deletelicense
      *
      * When any license is deleted, corresponding transaction is created automatically.
      *
@@ -206,7 +206,7 @@ class LicenseService
 
         $queryParams[Constants::CASCADE] = ((bool)$forceCascade) ? 'true' : 'false';
 
-        NetLicensingService::getInstance()
+        return NetLicensingService::getInstance()
             ->delete($context, Constants::LICENSE_ENDPOINT_PATH . '/' . $number, $queryParams);
     }
 }
